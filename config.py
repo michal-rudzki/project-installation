@@ -9,21 +9,34 @@ def folderCreation(folders):
             print("Created...")
 
 def djangoInstallation(appName=None):
-    proc = Popen(['django-admin.exe', 'startapp', (appName).lower()], stdout=PIPE, stderr=PIPE)
+    proc = Popen(['django-admin.exe', 'startapp', appName], stdout=PIPE, stderr=PIPE)
     stdout, stderr = proc.communicate()
     print(f'Django app: {appName} created.')
     
 def reactInstallation(appName=None):
-    proc = Popen(['npx.cmd', '-y', 'create-react-app', (appName).lower()], stdout=PIPE, stderr=PIPE)
+    proc = Popen(['npx.cmd', '-y', 'create-react-app', appName], stdout=PIPE, stderr=PIPE)
     stdout, stderr = proc.communicate()
     print(f'React app: {appName} created.')
 
+def main():
+    with open('config.json', 'r') as f:
+        jsonData = json.load(f)
 
-with open('config.json', 'r') as f:
-    jsonData = json.load(f)
+    for x in jsonData:
+        if x == 'folders':
+            folderCreation(jsonData[x])
+        
+        if x == 'installation':
+            for y in jsonData[x]:
+                print(y)
+                print(jsonData[x][y][0])
+        # leci pokoleji jak w pliku json, najpierw django and true (instllationDjango), react and true (installationReact)
+   # print(jsonData["installation"]["django"])
+   # print(jsonData["installation"]["react"])
 
-print(jsonData["installation"]["django"])
-print(jsonData["installation"]["react"])
+if __name__ == '__main__':
+    main()
+
 
 #folderCreation(jsonData["folders"]) 
 #djangoInstallation('Testowski')
