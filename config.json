@@ -1,0 +1,20 @@
+{
+    "folders":
+        [
+            "api",
+            "frontend",
+            "backend"
+        ],
+    
+    "installation":
+    {
+        "django": [
+            "true",
+            "django-app"
+        ],
+        "react": [
+            "true",
+            "react-app"
+        ]
+    }
+}
