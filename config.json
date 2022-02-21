@@ -11,7 +11,7 @@
             true,
             "api",
             [
-                "django-admin",
+                "django-admin.exe",
                 "startapp"
             ]
         ],
@@ -19,7 +19,7 @@
             false,
             "react-app",
             [
-                "npm",
+                "npx",
                 "-y",
                 "create-react-app"
             ]
