@@ -8,16 +8,11 @@ def folderCreation(folders):
             os.mkdir(x)
             print("Created...")
 
-def djangoInstallation(appName=None):
-    proc = Popen(['django-admin.exe', 'startapp', appName], stdout=PIPE, stderr=PIPE)
+def frameworkInst(cmdInst):
+    proc = Popen(cmdInst, stdout=PIPE, stderr=PIPE)
     stdout, stderr = proc.communicate()
-    print(f'Django app: {appName} created.')
+    print(f'AppName: {cmdInst[-1]} created.')
     
-def reactInstallation(appName=None):
-    proc = Popen(['npx.cmd', '-y', 'create-react-app', appName], stdout=PIPE, stderr=PIPE)
-    stdout, stderr = proc.communicate()
-    print(f'React app: {appName} created.')
-
 def main():
     with open('config.json', 'r') as f:
         jsonData = json.load(f)
@@ -26,13 +21,25 @@ def main():
         if x == 'folders':
             folderCreation(jsonData[x])
         
+        """ Installation depends on "service" : True """
         if x == 'installation':
+            cmdInst = []
+            
             for y in jsonData[x]:
-                print(y)
-                print(jsonData[x][y][0])
-        # leci pokoleji jak w pliku json, najpierw django and true (instllationDjango), react and true (installationReact)
-   # print(jsonData["installation"]["django"])
-   # print(jsonData["installation"]["react"])
+                cmdInst = []
+                for list in jsonData[x][y][2]:
+                    cmdInst.append(list)
+                cmdInst.append(jsonData[x][y][1])
+
+                if bool(jsonData[x][y][0]) == True:
+                    frameworkInst(cmdInst)
+
+                #print(y)
+                #print(jsonData[x][y][0])
+
+    # leci pokoleji jak w pliku json, najpierw django and true (instllationDjango), react and true (installationReact)
+    # print(jsonData["installation"]["django"])
+    # print(jsonData["installation"]["react"])
 
 if __name__ == '__main__':
     main()

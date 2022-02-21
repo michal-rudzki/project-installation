@@ -8,12 +8,21 @@
     "installation":
     {
         "django": [
-            "True",
-            "api"
+            true,
+            "api",
+            [
+                "django-admin",
+                "startapp"
+            ]
         ],
         "react": [
-            "True",
-            "react-app"
+            false,
+            "react-app",
+            [
+                "npm",
+                "-y",
+                "create-react-app"
+            ]
         ]
     }
 }
